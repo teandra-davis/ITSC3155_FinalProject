@@ -32,3 +32,9 @@ def posts_questions():
     return redirect('/index')
     
    
+
+@app.route('/search', methods=['POST'])
+def search():
+    query = request.form['query']
+    # results = perform_search(query)
+    return render_template('search.html', results = results)
