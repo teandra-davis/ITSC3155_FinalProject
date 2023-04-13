@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+<style>
+    .buttons {
+        width: 200%;
+    }
+</style>
+{% block title %}
+    <title>Search Page</title>
+{% endblock %}
+
+{% block body %}
+<div class="input-group">
+    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <button type="button" class="btn btn-outline-primary">search</button>
+</div>
+<br>
+<div class="buttons">
+    <button type="button" class="btn tbn-outline-info btn-lg">MATH</button>
+    <button type="button" class="btn tbn-outline-info btn-lg">SCIENCE</button>
+    <button type="button" class="btn tbn-outline-info btn-lg">ENGLISH</button>
+    <button type="button" class="btn tbn-outline-info btn-lg">HISTORY</button>
+    <button type="button" class="btn tbn-outline-info btn-lg">COMPUTER SCIENCE</button>
+    <button type="button" class="btn tbn-outline-info btn-lg">ARTS</button>
+</div>
+{% end block%}
