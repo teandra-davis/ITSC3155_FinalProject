@@ -5,3 +5,13 @@ app = Flask(__name__)
 @app.get('/')
 def index():
     return render_template('index.html')
+
+    @app.post('/index')
+def posts_questions():
+    # Trying to implememnt the posts html
+    title = request.form['title']
+    browse = request.form['browse']
+    description = request.form['description']
+    information = posts.create_post(title, browse, description)
+    return redirect('/index')
+
