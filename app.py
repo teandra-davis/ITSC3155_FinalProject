@@ -6,9 +6,15 @@ app = Flask(__name__)
 @app.get('/')
 def index():
     return render_template('index.html')
-=======
-
-#Running the App
-if __name__ == '__main__':
-    #DEBUG is SET to TRUE. CHANGE FOR PROD
-    app.run(debug=True)
+    
+@app.post('/index')
+def posts_questions():
+    # Trying to implememnt the posts html
+    title = request.form['title']
+    browse = request.form['browse']
+    description = request.form['description']
+    information = functional.create_post(title, browse, description)
+    return redirect('/index')
+    
+    
+   
