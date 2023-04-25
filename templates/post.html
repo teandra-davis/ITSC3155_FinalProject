@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block title %}<title>{Posts Page}</title>{% endblock %}
-
+<head> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
     {% block body %} 
     <div class="container">
         <div class="row">
@@ -15,7 +17,7 @@
                 <div class="input-group">
                   
                   <span class="input-btn">
-                      Browse <input type="file" name="fileSelect" multiple>
+                      Select <input type="file" name="fileSelect" multiple>
                    </span>
                  </div>
               </div>
