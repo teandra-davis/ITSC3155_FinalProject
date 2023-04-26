@@ -62,18 +62,48 @@ class Post(db.Model):
         self.post_subject = post_subject
 
 
-    def __repr__(self) -> str
-        return f'User({self.post_title}, {self.post_author}, {self.post_content}, {self.post_id})'
+    def __repr__(self) -> str:
+        return f'Post({self.post_title}, {self.post_author}, {self.post_content}, {self.post_id})'
 
     def to_dict(self) -> dict[str, any]:
         return {
-            "first_name" : self.first_name,
-            "last_name" : self.last_name,
-            "email" : self.email,
-            "date_added" : self.date_added,
-            "username" : self.username,
-            "password" : self.password,
-            "user_id" : self.user_id,
+            "post_id" : self.post_id,
+            "post_title" : self.post_title,
+            "post_author" : self.post_author,
+            "post_content" : self.post_content,
+            "post_comments" : self.post_comments,
+            "post_likes" : self.post_likes,
+            "post_subject" : self.post_subject,
         }
 
 class Comment(db.Model):
+    class Post(db.Model):
+        __tablename__ = "comments"
+
+        comment_author = db.Column(db.String(100), nullable = False)
+        comment_content = db.Column(db.String(100), nullable = False)
+        comment_likes = db.Column(db.Integer, primary_key = False)
+        comment_postid =  db.Column(db.Integer, primary_key = False)
+        comment_date = db.Column(db.DateTime, default = datetime.utcnow)
+
+        def __init__(self, comment_author: str, comment_postid: int, comment_content: str, comment_likes: int, comment_date: datetime) -> None:
+            super().__init__()
+            self.comment_postid = comment_postid
+            self.comment_author = comment_author
+            self.comment_content = comment_content
+            self.comment_likes = comment_likes
+            self.comment_date = comment_date
+
+
+        def __repr__(self) -> str:
+            return f'Comment({self.comment_author}, {self.comment_content}, {self.comment_postid})'
+
+        def to_dict(self) -> dict[str, any]:
+            return {
+                "comment_postid" : self.comment_postid,
+                "comment_author" : self.comment_author,
+                "comment_content" : self.comment_author,
+                "comment_likes" : self.comment_likes,
+                "comment_date" : self.comment_date,
+            }
+
