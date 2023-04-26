@@ -1,5 +1,4 @@
-from flask import Flask, abort, redirect, render_template, request
-from src.models import db
+from flask import Flask, redirect, render_template, request
 from dotenv import load_dotenv
 import os
 
@@ -15,20 +14,17 @@ db_name = os.getenv('DB_NAME')
 # TODO: DB connection
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 
-db.init_app(app)
-
 #Landing Page
 @app.get('/')
 def index():
     return render_template('index.html')
 
-@app.get('/index')
+@app.get('/create')
 def posts_questions():
-    # Trying to implememnt the posts html
+    # Trying to impleme nt the posts html
     title = request.form['title']
     files = request.files['fileSelect']
     description = request.form['description']
-    information = functional.create_post(title, files, description)
-    return redirect('/index')
+    return render_template('post.html')
     
    
