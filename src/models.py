@@ -106,4 +106,3 @@ class Comment(db.Model):
                 "comment_likes" : self.comment_likes,
                 "comment_date" : self.comment_date,
             }
-
