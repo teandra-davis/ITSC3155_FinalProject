@@ -1,22 +1,16 @@
 from flask import Blueprint, abort, jsonify, request
 from src.models import User, db
 
-post_router = Blueprint('posts', __name__, url_prefix='/post')
+post_router = Blueprint('user', __name__, url_prefix='/user')
 
 
-
-@post_router.get('')
+# user profile
+@post_router.get('/profile')
 def get_all_books():
     posts = Post.query.all()
     return jsonify(post.to_dict())
 
     pass
-
-
-@post_router.get('/<int:book_id>')
-def get_single_book(book_id: int):
-    book = Book.query.get_or_404(book_id)
-    return jsonify(book.to_dict())
 
 
 @post_router.get('')
