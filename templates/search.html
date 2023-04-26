@@ -9,10 +9,12 @@
 {% endblock %}
 
 {% block body %}
-<div class="input-group">
-    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-    <button type="button" class="btn btn-outline-primary">search</button>
-</div>
+<form action="{{url_for('search')}}" method="POST">
+    <div class="input-group">
+        <input type="text" name='query' class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button type="submit" class="btn btn-outline-primary">search</button>
+    </div>
+</form>
 <br>
 <div class="buttons">
     <button type="button" class="btn tbn-outline-info btn-lg">MATH</button>
