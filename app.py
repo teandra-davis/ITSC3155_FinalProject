@@ -23,8 +23,10 @@ def index():
 def posts_questions():
     # Trying to impleme nt the posts html
     title = request.form['title']
-    files = request.files['fileSelect']
-    description = request.form['description']
+    content = request.form['content']
+    subject = request.form['subject']
+    #information = models.c
+    # reate_post(title, content, subject)
     return render_template('post.html')
     
    
