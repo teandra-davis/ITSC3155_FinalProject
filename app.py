@@ -40,7 +40,7 @@ def posts_questions():
     title = request.form['title']
     browse = request.form['browse']
     description = request.form['description']
-    #information = functional.create_post(title, browse, description)
+    information = functional.create_post(title, browse, description)
     return redirect('/index')
     
    
@@ -48,4 +48,4 @@ def posts_questions():
 def search():
     query = request.form['query']
     #results = perform_search(query)
-    return render_template('search.html') #, results = results)
+    return render_template('search.html', results = results)
