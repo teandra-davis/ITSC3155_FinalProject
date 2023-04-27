@@ -25,8 +25,7 @@ def posts_questions():
     title = request.form['title']
     content = request.form['content']
     subject = request.form['subject']
-    #information = models.c
-    # reate_post(title, content, subject)
+    #information = models.create_post(title, content, subject)
     return render_template('post.html')
     
    
