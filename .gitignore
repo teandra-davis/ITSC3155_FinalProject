@@ -3,4 +3,6 @@ venv
 .DS_Store
 __pycache__
 .pytest_cache
-requirements.txt
+#requirements.txt
+.env
+node_modules
