@@ -29,10 +29,10 @@ def index():
 @app.get('/create')
 def posts_questions():
     # Trying to impleme nt the posts html
-    title = request.form['title']
-    content = request.form['content']
-    subject = request.form['subject']
-    #information = models.create_post(title, content, subject)
+    title = request.form.get('title', '')
+    content = request.form.get('content','')
+    subject = request.form.get('subject','')
+    information = post_repository.create_post(title, content, subject)
     return render_template('post.html')
     
 
