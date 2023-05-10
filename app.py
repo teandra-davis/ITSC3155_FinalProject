@@ -2,13 +2,20 @@ from flask import Flask, redirect, render_template, request
 from dotenv import load_dotenv
 import os
 
+#TO DOWNLOAD ALL DEPENDENCIES, PIP INSTALL -R REQUIREMENTS.TXT
 load_dotenv()
 app = Flask(__name__)
 
+#LOCATED IN ENV.SAMPLE AND FILL OUT THE INFORMATION
+#postgres
 db_user = os.getenv('DB_USER')
+
 db_pass = os.getenv('DB_PASS')
+#postgres
 db_host = os.getenv('DB_HOST')
+#5432
 db_port = os.getenv('DB_PORT')
+#finalproject
 db_name = os.getenv('DB_NAME')
 
 # TODO: DB connection
@@ -28,4 +35,9 @@ def posts_questions():
     #information = models.create_post(title, content, subject)
     return render_template('post.html')
     
-   
+
+#@app.route('/search', methods=['POST'])
+#def search():
+   # query = request.form['query']
+   # results = perform_search(query)
+  #  return render_template('search.html', results = results)
