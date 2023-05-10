@@ -9,11 +9,10 @@
 {% endblock %}
 
 {% block body %}
-<form action="{{url_for('search')}}" method="POST">
-    <div class="input-group">
-        <input type="text" name='query' class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-        <button type="submit" class="btn btn-outline-primary">search</button>
-    </div>
+<form action="{{url_for('search')}}" method="POST" action="{{  url_for('search')}}">
+    {{ form.hidden_tag() }}
+    <input type="text" name='searched' class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <button type="submit" class="btn btn-outline-primary">search<button>
 </form>
 <br>
 <div class="buttons">
