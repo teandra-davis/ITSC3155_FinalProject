@@ -8,7 +8,7 @@ class PostRepository:
         return all_posts
 
     def get_post_by_id(self, post_id: int) -> HomeworkPost:
-        found_post: HomeworkPost = HomeworkPost.query.get_or_404(movie_id)
+        found_post: HomeworkPost = HomeworkPost.query.get_or_404(post_id)
         return found_post
 
     def create_post(self, author_name: str, title: str, details: str, category_id: int) -> HomeworkPost:
