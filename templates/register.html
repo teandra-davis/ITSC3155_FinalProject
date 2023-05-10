@@ -2,7 +2,7 @@
 
 {% block title %}<title>Login</title>{% endblock %}
 
-<form action="/login" method="POST">
+<form action="/register" method="POST">
     <div>
         <label for="username">Username</label>
         <input type="text" name="username" id="username" required>
@@ -11,6 +11,19 @@
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
     </div>
+    <div>
+        <label for="fname">First Name</label>
+        <input type="text" name="fname" id="fname" required>
+        <label for="lname">Last Name</label>
+        <input type="text" name="lname" id="lname" required>
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+    </div>
     <button class="btn btn-primary">Submit</button>
 </form>
+
+
+
 {% block body %}<h1>Login Page</h1> {% endblock %}
