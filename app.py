@@ -12,19 +12,9 @@ load_dotenv()
 app = Flask(__name__)
 
 #LOCATED IN ENV.SAMPLE AND FILL OUT THE INFORMATION
-#postgres
-db_user = os.getenv('DB_USER')
-
-db_pass = os.getenv('DB_PASS')
-#postgres
-db_host = os.getenv('DB_HOST')
-#5432
-db_port = os.getenv('DB_PORT')
-#finalproject
-db_name = os.getenv('DB_NAME')
 
 # TODO: DB connection
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 
 db.init_app(app)
 
