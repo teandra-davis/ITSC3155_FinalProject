@@ -19,7 +19,7 @@ db.init_app(app)
 def index():
     return render_template('index.html')
 
-@app.get('/create')
+@app.get('/post/create')
 def create_post():
     return render_template('post.html')
 
@@ -31,7 +31,7 @@ def create_post():
     content = request.form.get('content','')
     category = request.form.get('category','')
     post_repository_singleton.create_post(title, author_name, content, category)
-    return redirect('show_all.html')
+    return redirect('single_post.html')
 
 
 #@app.route('/search', methods=['POST'])
