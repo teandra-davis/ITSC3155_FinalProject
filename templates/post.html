@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
     {% block body %} 
-    <div>
+    <div class="container">
       <form action="/create" method="post">
           <label for="title">Title:</label><br>
           <input type="text" id="title" name="title" required><br>
