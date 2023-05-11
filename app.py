@@ -1,4 +1,5 @@
 from flask import Flask, redirect, render_template, request
+from src.models import db
 from dotenv import load_dotenv
 import os
 
@@ -20,7 +21,8 @@ db_name = os.getenv('DB_NAME')
 
 # TODO: DB connection
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
-
+db.init_app(app)
+        
 #Landing Page
 @app.get('/')
 def index():
