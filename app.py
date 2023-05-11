@@ -19,10 +19,6 @@ db.init_app(app)
 def index():
     return render_template('index.html')
 
-@app.route('/about', methods=[''])
-def about():
-    return render_template("about.html")
-
 #Showing all posts
 @app.get('/post/all')
 def list_all_posts():
