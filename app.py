@@ -1,6 +1,8 @@
 from flask import Flask, redirect, render_template, request
+from src.models import db
 from dotenv import load_dotenv
 import os
+from src.repositories.post_repository import post_repository_singleton
 
 #TO DOWNLOAD ALL DEPENDENCIES, PIP INSTALL -R REQUIREMENTS.TXT
 load_dotenv()
@@ -9,35 +11,37 @@ app = Flask(__name__)
 #from src.repositories.post_repository import 
 
 #LOCATED IN ENV.SAMPLE AND FILL OUT THE INFORMATION
-#postgres
-db_user = os.getenv('DB_USER')
-
-db_pass = os.getenv('DB_PASS')
-#postgres
-db_host = os.getenv('DB_HOST')
-#5432
-db_port = os.getenv('DB_PORT')
-#finalproject
-db_name = os.getenv('DB_NAME')
 
 # TODO: DB connection
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
-
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+db.init_app(app)
+      
 #Landing Page
 @app.get('/')
 def index():
     return render_template('index.html')
 
+<<<<<<< HEAD
 @app.post('/create')
 def posts_questions():
     # Trying to impleme nt the posts html
     author_name = request.form.get('author_name', '')
+=======
+@app.get('/create')
+def create_post():
+    return render_template('post.html')
+
+@app.post('/post')
+def create_post():
+    # Trying to implementation nt the posts html
+    author_name = request.form.get('author', '')
+>>>>>>> main
     title = request.form.get('title', '')
     content = request.form.get('content','')
-    subject = request.form.get('subject','')
-    information = post_repository.create_post(title, content, subject)
-    return render_template('post.html')
-    
+    category = request.form.get('category','')
+    post_repository_singleton.create_post(title, author_name, content, category)
+    return redirect('show_all.html')
+
 
 #@app.route('/search', methods=['POST'])
 #def search():
