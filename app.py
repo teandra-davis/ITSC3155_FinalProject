@@ -19,10 +19,24 @@ db.init_app(app)
 def index():
     return render_template('index.html')
 
+#Showing all posts
+@app.get('/post/all')
+def list_all_posts():
+    all_posts = post_repository_singleton.get_all_posts()
+    return render_template('show_all.html', posts=all_posts)
+
+#Showing the create post html
 @app.get('/post/create')
 def show_post():
     return render_template('post.html')
 
+#Showing the individual create post
+@app.get('/post/<int:post_id>')
+def show_single_post(post_id: int):
+    single_post = post_repository_singleton.get_post_by_id(post_id)
+    return render_template('single_post.html', single_post=single_post)
+
+#Creating a new post
 @app.post('/post')
 def create_post():
     # Trying to implementation nt the posts html
@@ -30,10 +44,10 @@ def create_post():
     title = request.form.get('title', '')
     content = request.form.get('content','')
     category = request.form.get('category')
-    post_repository_singleton.create_post(title, author_name, content, category)
-    return redirect('single_post.html')
+    created_post = post_repository_singleton.create_post(title, author_name, content, category)
+    return redirect(f'/post/{created_post.post_id}')
 
-
+#Searching all posts
 #@app.route('/search', methods=['POST'])
 #def search():
    # query = request.form['query']
