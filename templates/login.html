@@ -2,6 +2,10 @@
 
 {% block title %}<title>Login</title>{% endblock %}
 
+{% block body %}
+
+<h1>Login Page</h1> 
+
 <form action="/login" method="POST">
     <div>
         <label for="username">Username</label>
@@ -13,4 +17,7 @@
     </div>
     <button class="btn btn-primary">Submit</button>
 </form>
-{% block body %}<h1>Login Page</h1> {% endblock %}
+
+<p><a href="/register">Don't have an account? Click here to register</a></p>
+
+{% endblock %}

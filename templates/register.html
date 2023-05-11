@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}<title>Login</title>{% endblock %}
+{% block title %}<title>Register</title>{% endblock %}
 
+
+
+{% block body %}
+<h1>Register</h1> 
 <form action="/register" method="POST">
     <div>
         <label for="username">Username</label>
@@ -24,6 +28,4 @@
     <button class="btn btn-primary">Submit</button>
 </form>
 
-
-
-{% block body %}<h1>Login Page</h1> {% endblock %}
+{% endblock %}
