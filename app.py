@@ -6,7 +6,7 @@ import os
 load_dotenv()
 app = Flask(__name__)
 
-from src.repositories.post_repository import movie_repository_singleton
+#from src.repositories.post_repository import 
 
 #LOCATED IN ENV.SAMPLE AND FILL OUT THE INFORMATION
 #postgres
