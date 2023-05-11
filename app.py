@@ -1,10 +1,15 @@
-from flask import Flask, abort, redirect, render_template, request, FlaskForm
+from flask import Flask, abort, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf import FlaskForm
+from jinja2 import FunctionLoader
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
-from src.models import db
+from src.models import Post, db
 from dotenv import load_dotenv
 from datetime import datetime #keep track of date and time
+from src.routes.post_router import post_router
+from src.routes.user_router import user_router
+
 import os
 
 #TO DOWNLOAD ALL DEPENDENCIES, PIP INSTALL -R REQUIREMENTS.TXT
@@ -23,7 +28,7 @@ db_port = os.getenv('DB_PORT')
 #finalproject
 db_name = os.getenv('DB_NAME')
 
-# TODO: DB connection
+# TODO: DB connectiont
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'
 
 db.init_app(app)
@@ -32,6 +37,14 @@ db.init_app(app)
 class NamerForm(FlaskForm):
     name = StringField("What's your name", validators=[DataRequired()])
     submit = SubmitField("Submit")
+
+#search form
+class SearchForm(FlaskForm):
+    searched = StringField("Searched", validators=DataRequired)
+    submit = SubmitField("Submit")
+
+app.register_blueprint(post_router)
+app.register_blueprint(user_router)
 
 #Landing Page
 @app.route('/')
@@ -44,7 +57,7 @@ def posts_questions():
     title = request.form['title']
     browse = request.form['browse']
     description = request.form['description']
-    information = functional.create_post(title, browse, description)
+    information = FunctionLoader.create_post(title, browse, description)
     return redirect('/index')
 
 
@@ -77,3 +90,18 @@ def view_single_post():
 @app.route('post/all_posts')
 def view_all_posts():
     pass
+
+#Pass searched items to navbar
+@app.context_processor
+def base():
+    form = SearchForm()
+    return dict(form=form)
+
+#search option in navbar
+@app.route('/search', methods=['POST'])
+def search():
+    form = SearchForm()
+    posts = posts.query
+    if form.validate_on_submit():
+        posts.searched = form.searched.data
+        return render_template('search.html', form=form, searched=posts.searched)

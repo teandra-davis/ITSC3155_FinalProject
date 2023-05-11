@@ -1,108 +1,64 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash 
 import datetime
+
+from sqlalchemy import DateTime
 
 db = SQLAlchemy()
 
-class User(db.Model):
+# Create Model
+class Users(db.Model, UserMixin):
+	id = db.Column(db.Integer, primary_key=True)
+	username = db.Column(db.String(20), nullable=False, unique=True)
+	name = db.Column(db.String(200), nullable=False)
+	email = db.Column(db.String(120), nullable=False, unique=True)
+	about_author = db.Column(db.Text(), nullable=True)
+	date_added = db.Column(db.DateTime, default=datetime.utcnow)
+	profile_pic = db.Column(db.String(), nullable=True)
 
-    __tablename__ = 'user'
-
-    user_id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(100), nullable = False)
-    last_name = db.Column(db.String(100), nullable = False)
-    email = db.Column(db.String(200), nullable = False, unique = True)
-    date_added = db.Column(db.DateTime, default = datetime.utcnow)
-    username = db.Column(db.String(20), nullable = False, unique = True)
-    password = db.Column(db.String(100), nullable = False)
-
-    def __init__(self, first_name: str, last_name: str, email: str, date_added: datetime, username: str, password: str, user_id: int) -> None:
-        super().__init__()
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
-        self.date_added = date_added
-        self.username = username
-        self.password = password
-        self.user_id = user_id
+	# Password hash
+	password_hash = db.Column(db.String(128))
+	# User Can Have Many Posts 
+	posts = db.relationship('Posts', backref='poster')
 
 
-    def __repr__(self) -> str:
-        return f'User({self.first_name}, {self.last_name}, {self.username}, {self.email})'
+	@property
+	def password(self):
+		raise AttributeError('password is not a readable attribute!')
 
-    def to_dict(self) -> dict[str, any]:
-        return {
-            "first_name" : self.first_name,
-            "last_name" : self.last_name,
-            "email" : self.email,
-            "date_added" : self.date_added,
-            "username" : self.username,
-            "password" : self.password,
-            "user_id" : self.user_id,
-        }
+	@password.setter
+	def password(self, password):
+		self.password_hash = generate_password_hash(password)
+
+	def verify_password(self, password):
+		return check_password_hash(self.password_hash, password)
+
+	# Create A String
+	def __repr__(self):
+		return '<Name %r>' % self.name
 
 class Post(db.Model):
     __tablename__ = "post"
 
-    post_id = db.Column(db.Integer, primary_key=True)
-    post_title = db.Column(db.String(100), nullable = False)
-    post_author = db.Column(db.String(100), nullable = False)
-    post_content = db.Column(db.String(100), nullable = False)
-    post_comments = db.Column(db.String(200), nullable = True)
-    post_likes = db.Column(db.Integer, primary_key = False)
-    post_subject = db.Column(db.String(20), nullable = False)
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255))
+    content = db.Column(db.Text)
+	#author = db.Column(db.String(255))
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow)
+    slug = db.Column(db.String(255))
+    likes = db.Column(db.Integer)
+	# Foreign Key To Link Users (refer to primary key of the user)
+    poster_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    def __init__(self, post_title: str, post_id: int, post_author: str, post_content: str, post_comments: dict, post_likes: int, post_subject: str) -> None:
-        super().__init__()
-        self.post_id = post_id
-        self.post_title = post_title
-        self.post_author = post_author
-        self.post_content = post_content
-        self.post_comments = post_comments
-        self.post_likes = post_likes
-        self.post_subject = post_subject
-
-
-    def __repr__(self) -> str:
-        return f'Post({self.post_title}, {self.post_author}, {self.post_content}, {self.post_id})'
-
-    def to_dict(self) -> dict[str, any]:
-        return {
-            "post_id" : self.post_id,
-            "post_title" : self.post_title,
-            "post_author" : self.post_author,
-            "post_content" : self.post_content,
-            "post_comments" : self.post_comments,
-            "post_likes" : self.post_likes,
-            "post_subject" : self.post_subject,
-        }
+    posts = db.relationship('Comment', backref='comments')
 
 class Comment(db.Model):
-    class Post(db.Model):
+    class Comment(db.Model):
         __tablename__ = "comments"
 
-        comment_author = db.Column(db.String(100), nullable = False)
-        comment_content = db.Column(db.String(100), nullable = False)
-        comment_likes = db.Column(db.Integer, primary_key = False)
-        comment_postid =  db.Column(db.Integer, primary_key = False)
-        comment_date = db.Column(db.DateTime, default = datetime.utcnow)
-
-        def __init__(self, comment_author: str, comment_postid: int, comment_content: str, comment_likes: int, comment_date: datetime) -> None:
-            super().__init__()
-            self.comment_postid = comment_postid
-            self.comment_author = comment_author
-            self.comment_content = comment_content
-            self.comment_likes = comment_likes
-            self.comment_date = comment_date
-
-
-        def __repr__(self) -> str:
-            return f'Comment({self.comment_author}, {self.comment_content}, {self.comment_postid})'
-
-        def to_dict(self) -> dict[str, any]:
-            return {
-                "comment_postid" : self.comment_postid,
-                "comment_author" : self.comment_author,
-                "comment_content" : self.comment_author,
-                "comment_likes" : self.comment_likes,
-                "comment_date" : self.comment_date,
-            }
+        comment_author = db.Column(db.Integer, db.ForeignKey('users.id'))
+        content = db.Column(db.Text, nullable = False)
+        likes = db.Column(db.Integer, primary_key = False)
+        comment_postid = db.Column(db.Integer, db.ForeignKey('post.id'))
+        comment_date = db.Column(db.DateTime, default = datetime.datetime)

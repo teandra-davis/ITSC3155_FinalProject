@@ -1,26 +1,5 @@
 {% extends 'base.html' %}
-<style>
-    .buttons {
-        width: 200%;
-    }
-</style>
-{% block title %}
-    <title>Search Page</title>
+{% block content %}
+<h2>You searched for...</h2>
+<p>{{ searched }}</p>
 {% endblock %}
-
-{% block body %}
-<form action="{{url_for('search')}}" method="POST" action="{{  url_for('search')}}">
-    {{ form.hidden_tag() }}
-    <input type="text" name='searched' class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-    <button type="submit" class="btn btn-outline-primary">search<button>
-</form>
-<br>
-<div class="buttons">
-    <button type="button" class="btn tbn-outline-info btn-lg">MATH</button>
-    <button type="button" class="btn tbn-outline-info btn-lg">SCIENCE</button>
-    <button type="button" class="btn tbn-outline-info btn-lg">ENGLISH</button>
-    <button type="button" class="btn tbn-outline-info btn-lg">HISTORY</button>
-    <button type="button" class="btn tbn-outline-info btn-lg">COMPUTER SCIENCE</button>
-    <button type="button" class="btn tbn-outline-info btn-lg">ARTS</button>
-</div>
-{% end block%}
