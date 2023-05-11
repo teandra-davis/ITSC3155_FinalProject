@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, abort
+from flask import Flask, redirect, render_template, request, abort, session
 from src.models import db
 from src.models import User 
 from security import bcrypt
@@ -16,6 +16,8 @@ app = Flask(__name__)
 
 # TODO: DB connection
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+
+app.secret_key = os.getenv('APP_SECRET')
 db.init_app(app)
 bcrypt.init_app(app)
 
@@ -70,7 +72,10 @@ def login():
 
         if bcrypt.check_password_hash(existing_user.password, password):
             # Redirect to the landing page
-            return redirect('/')
+            session['user'] = {
+                'username':username
+            }
+            return redirect('/user')
         else:
             # Return an error message
             return render_template('login.html', error='Invalid login credentials')
@@ -106,9 +111,28 @@ def register():
         now = datetime.now()
         date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
         new_user = user_repository_singleton.create_user(username, hashed_password, email, first_name, last_name, date_time)
-
+    
         # Redirect to the login page
         return redirect('/login')
     else:
         # Render the registration page
         return render_template('register.html')
+
+# User page
+@app.route('/user')
+def user():
+    if 'user' not in session:
+        return redirect('/')
+    # Get the current user's information from the database
+    user = session['user']
+    print(user)
+    current_user = User.query.filter_by(username=user['username']).first()
+    print(current_user)
+    username = current_user.username
+    first_name = current_user.first_name
+    last_name = current_user.last_name
+    email = current_user.email
+    account_created = current_user.date_added
+
+    # Render the user page with the user's information
+    return render_template('user.html', username=username, first_name=first_name, last_name=last_name, email=email, account_created=account_created)
