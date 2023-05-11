@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 import os
 from src.repositories.post_repository import post_repository_singleton
+from src.repositories.user_repository import user_repository_singleton
 
 #TO DOWNLOAD ALL DEPENDENCIES, PIP INSTALL -R REQUIREMENTS.TXT
 load_dotenv()
@@ -104,13 +105,7 @@ def register():
 
         now = datetime.now()
         date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
-
-        user = User(username=username, password=hashed_password, email=email, first_name=first_name, last_name=last_name, date_added=date_time)
-
-
-        # Add the new user to the database
-        db.session.add(user)
-        db.session.commit()
+        new_user = user_repository_singleton.create_user(username, hashed_password, email, first_name, last_name, date_time)
 
         # Redirect to the login page
         return redirect('/login')
