@@ -1,24 +1,24 @@
-from src.models import HomeworkPost, HomeworkCategory, db
+from src.models import Post, db
 
 
 class PostRepository:
 
-    def get_all_posts(self) -> list[HomeworkPost]:
-        all_posts: list[HomeworkPost] = HomeworkPost.query.all()
+    def get_all_posts(self) -> list[Post]:
+        all_posts: list[Post] = Post.query.all()
         return all_posts
 
-    def get_post_by_id(self, post_id: int) -> HomeworkPost:
-        found_post: HomeworkPost = HomeworkPost.query.get_or_404(post_id)
+    def get_post_by_id(self, post_id: int) -> Post:
+        found_post: Post = Post.query.get_or_404(post_id)
         return found_post
 
-    def create_post(self, author_name: str, title: str, content: str, subject: int) -> HomeworkPost:
-        new_post = HomeworkPost(author_name=author_name, title=title, content=content, subject=subject)
+    def create_post(self, title: str, author: str, content: str, category: str) -> Post:
+        new_post = Post(title=title, author=author, content=content, category=category)
         db.session.add(new_post)
         db.session.commit()
         return new_post
 
-    def search_posts(self, details: str) -> list[HomeworkPost]:
-        found_posts: list[HomeworkPost] = HomeworkPost.query.filter(HomeworkPost.details.ilike(f'%{details}%')).all()
+    def search_posts(self, content: str) -> list[Post]:
+        found_posts: list[Post] = Post.query.filter(Post.details.ilike(f'%{content}%')).all()
         return found_posts
 
 
