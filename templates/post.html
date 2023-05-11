@@ -1,32 +1,33 @@
 {% extends 'base.html' %}
 
 {% block title %}<title>{Posts Page}</title>{% endblock %}
-
+<head> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
     {% block body %} 
-    <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <form method="post" role="form">
-              <div class="form-group">
-                <input type="text" class="form-control" name="title" placeholder="Title"/>
-              </div>
-              <div class="form-group">
-                <label> Image </label>
-                <div class="input-group">
-                  
-                  <span class="input-btn">
-                      Browse <input type="file" name="fileSelect" multiple>
-                   </span>
-                 </div>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control bcontent" name="content"></textarea>
-              </div>
-              <div class="form-group">
-                 <input type="submit" name="Submit" value="Publish" class="btn btn-primary form-control" />
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+    <div>
+      <form action="/create" method="post">
+          <label for="title">Title:</label><br>
+          <input type="text" id="title" name="title" required><br>
+          
+          <form action="#">
+            <label for="subject">Subject:</label>
+            <select name="subject" id="subject">
+              <option value="math">Math</option>
+              <option value="science">Science</option>
+              <option value="english">English</option>
+              <option value="history">History</option>
+              <option value="cs">Computer Science</option>
+              <option value="arts">Arts</option>
+              <option value="other">Other</option>
+            </select>
+            <input type="submit" value="Submit" />
+      </form>
+
+          <label for="content">Content:</label><br>
+          <input type="text" id="content" name="content" required><br>
+          <br>
+          <input type="submit" value="Submit">
+      </form>
+  </div>
 {% endblock %}
