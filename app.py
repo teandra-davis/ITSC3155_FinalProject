@@ -48,6 +48,15 @@ def posts_questions():
     subject = request.form.get('subject','')
     information = post_repository.create_post(title, content, subject)
     return render_template('post.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        return 'Registration successful!'
+    
+    return render_template('register.html')
     
 
 #@app.route('/search', methods=['POST'])
