@@ -21,12 +21,6 @@ db.init_app(app)
 def index():
     return render_template('index.html')
 
-<<<<<<< HEAD
-@app.post('/create')
-def posts_questions():
-    # Trying to impleme nt the posts html
-    author_name = request.form.get('author_name', '')
-=======
 @app.get('/create')
 def create_post():
     return render_template('post.html')
@@ -35,7 +29,6 @@ def create_post():
 def create_post():
     # Trying to implementation nt the posts html
     author_name = request.form.get('author', '')
->>>>>>> main
     title = request.form.get('title', '')
     content = request.form.get('content','')
     category = request.form.get('category','')
