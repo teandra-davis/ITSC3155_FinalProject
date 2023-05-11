@@ -29,7 +29,7 @@ def create_post():
     author_name = request.form.get('author', '')
     title = request.form.get('title', '')
     content = request.form.get('content','')
-    category = request.form.get('category','')
+    category = request.form.get('category')
     post_repository_singleton.create_post(title, author_name, content, category)
     return redirect('single_post.html')
 
