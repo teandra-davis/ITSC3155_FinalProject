@@ -2,9 +2,28 @@
 
 {% block title %} <title>See All Posts!</title> {% endblock %}
 
-{% block body %}<h1>Hello this is a Test</h1> {% endblock %}
-
-display all posts from most recently uploaded on top
-#display the date each post was updated
-#implement a rating system or a token system where the users can 
-#"upvote" other users posts
+{% block body %}
+    <div class = "container py-5">
+        <div class="text-center py-5">
+            <h1>All Posts</h1>
+        </div>
+        <table class = "table">
+            <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Content</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                    <tr>
+                        <td><a href="/post/{{ post.post_id }}">{{ post.author }}</a></td>
+                        <td>{{ post.content }}</td>
+                        <td>{{ post.category }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

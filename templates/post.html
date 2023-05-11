@@ -1,32 +1,46 @@
 {% extends 'base.html' %}
 
 {% block title %}<title>{Posts Page}</title>{% endblock %}
-
+<head> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
     {% block body %} 
-    <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <form method="post" role="form">
-              <div class="form-group">
-                <input type="text" class="form-control" name="title" placeholder="Title"/>
-              </div>
-              <div class="form-group">
-                <label> Image </label>
-                <div class="input-group">
-                  
-                  <span class="input-btn">
-                      Browse <input type="file" name="fileSelect" multiple>
-                   </span>
-                 </div>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control bcontent" name="content"></textarea>
-              </div>
-              <div class="form-group">
-                 <input type="submit" name="Submit" value="Publish" class="btn btn-primary form-control" />
-              </div>
-            </form>
-          </div>
-        </div>
+    <div class = 'container'>
+
+      <div class="text-center py-5">
+        <h1>Create a Post Below</h1>
       </div>
+      
+      <form action="/post" method="POST">
+          <label for="title" class = "form-label">Name:</label>
+          <input type="text" id="author" name="author" class = "form-control" required>
+
+          <br>
+
+          <label for="title" class = "form-label">Title:</label>
+          <input type="text" id="title" name="title" class = "form-control" required>
+          
+          <br>
+
+          <label for="content" class = "form-label">Content:</label>
+          <textarea type="text" id="content" name="content" class = "form-control" required></textarea>
+
+          <br>
+
+          <label for="category" class = "form-label">Category:</label>
+          <select name = "category" class="form-control form-select-lg mb-3" aria-label="Default select example" required>
+            <option selected value="1212">1212</option>
+            <option value="1213">1213</option>
+            <option value="2214">2214</option>
+            <option value="3155">3155</option>
+          </select>
+
+          <br>
+          
+          <div class="text-center py-5">
+            <button type="submit" class = "btn btn-primary">Submit</button>
+          </div>
+          
+      </form>
+  </div>
 {% endblock %}
