@@ -28,7 +28,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{db_user}:{db_pass}@{db_h
 def index():
     return render_template('index.html')
 
-@app.get('/create')
+@app.post('/create')
 def posts_questions():
     # Trying to impleme nt the posts html
     author_name = request.form.get('author_name', '')
