@@ -20,7 +20,7 @@ def index():
     return render_template('index.html')
 
 @app.get('/post/create')
-def create_post():
+def show_post():
     return render_template('post.html')
 
 @app.post('/post')
