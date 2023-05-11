@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Single Post</title>{% endblock %}
+
+{% block body %} 
+    <div class = 'container'>
+
+      <div class="text-center py-5">
+        <h1>{{ single_post.a }}</h1>
+      </div>
+      
+      <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">{{ single_post.title }}</h2>
+                <h6 class="card-subtitle text-muted">by {{ single_post.author }}</h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ single_post.content }}</p>
+            </div>
+            <div class="card-footer text-muted">
+                Category: {{ single_post.category }}
+            </div>
+        </div>
+    </div>
+    
+    </div>
+{% endblock %}
