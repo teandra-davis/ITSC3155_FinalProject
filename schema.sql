@@ -1,13 +1,10 @@
-CREATE TABLE homework_category (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE
-);
+CREATE TYPE post_category AS ENUM ('1212', '1213', '2214', '3155');
 
-CREATE TABLE homework_post (
-    post_id INT PRIMARY KEY AUTO_INCREMENT,
-    author_name VARCHAR(255) NOT NULL,
-    details TEXT NOT NULL,
-    category_id INT,
-    post_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES homework_category(id)
+CREATE TABLE IF NOT EXISTS post (
+    post_id SERIAL,
+    title    VARCHAR(255) NOT NULL,
+    author   VARCHAR(255) NOT NULL,
+    content  TEXT NOT NULL,
+    category post_category NOT NULL,
+    PRIMARY KEY (post_id)
 );

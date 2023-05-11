@@ -5,29 +5,42 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
     {% block body %} 
-    <div>
-      <form action="/create" method="post">
-          <label for="title">Title:</label><br>
-          <input type="text" id="title" name="title" required><br>
-          
-          <form action="#">
-            <label for="subject">Subject:</label>
-            <select name="subject" id="subject">
-              <option value="math">Math</option>
-              <option value="science">Science</option>
-              <option value="english">English</option>
-              <option value="history">History</option>
-              <option value="cs">Computer Science</option>
-              <option value="arts">Arts</option>
-              <option value="other">Other</option>
-            </select>
-            <input type="submit" value="Submit" />
-      </form>
+    <div class = 'container'>
 
-          <label for="content">Content:</label><br>
-          <input type="text" id="content" name="content" required><br>
+      <div class="text-center py-5">
+        <h1>Create a Post Below</h1>
+      </div>
+      
+      <form action="/post" method="POST">
+          <label for="title" class = "form-label">Name:</label>
+          <input type="text" id="author" name="author" class = "form-control" required>
+
           <br>
-          <input type="submit" value="Submit">
+
+          <label for="title" class = "form-label">Title:</label>
+          <input type="text" id="title" name="title" class = "form-control" required>
+          
+          <br>
+
+          <label for="content" class = "form-label">Content:</label>
+          <textarea type="text" id="content" name="content" class = "form-control" required></textarea>
+
+          <br>
+
+          <label for="category" class = "form-label">Category:</label>
+          <select name = "category" class="form-control form-select-lg mb-3" aria-label="Default select example" required>
+            <option selected value="1212">1212</option>
+            <option value="1213">1213</option>
+            <option value="2214">2214</option>
+            <option value="3155">3155</option>
+          </select>
+
+          <br>
+          
+          <div class="text-center py-5">
+            <button type="submit" class = "btn btn-primary">Submit</button>
+          </div>
+          
       </form>
   </div>
 {% endblock %}
