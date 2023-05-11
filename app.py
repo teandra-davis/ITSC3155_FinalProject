@@ -101,7 +101,11 @@ def register():
         hashed_password = bcrypt.generate_password_hash(password).decode()
 
         # Create a new User object
-        user = User(username=username, password=hashed_password, email=email, first_name=first_name, last_name=last_name, date_added=datetime.date)
+
+        now = datetime.now()
+        date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+
+        user = User(username=username, password=hashed_password, email=email, first_name=first_name, last_name=last_name, date_added=date_time)
 
 
         # Add the new user to the database
