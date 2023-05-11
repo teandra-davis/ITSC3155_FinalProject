@@ -4,21 +4,108 @@
 
 
 {% block body %}
-<h1>About Us Page</h1> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="default.css">
+    <style>
+        
+        header {
+          background-color: #333;
+          font-size:x-large;
+          font-weight: 500;
+          color: #fff;
+          padding: 10px;
+          text-align: center;
+        }
+        
+        h1 {
+          margin: 20;
+        }
+        
+        .container {
+          max-width: 1050px;
+          margin: 20 auto;
+          padding: 20px;
+          background-color: #ffffff;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          border-radius: 5px;
+        }
+        
+        h5 {
+          font-size: large;
+          font-style: bold;
+          margin-top: 0;
+        }
+        
+        p {
+            font-family: Arial, Helvetica, sans-serif;
+          background-color: rgb(255, 255, 255);
+          margin: 10;
+          padding: 10;
+        }
 
-<div class="about">
-    <div class="text">
-      <h2>About Us</h2>
-      <h5>Class <span>Student</span></h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita natus ad sed harum itaque ullam enim quas, veniam accusantium, quia animi id eos adipisci iusto molestias asperiores explicabo cum vero atque amet corporis! Soluta illum facere consequuntur magni. Ullam dolorem repudiandae cumque voluptate consequatur consectetur, eos provident necessitatibus reiciendis corrupti!</p>
-      <div class="data">
-      </div>
-    </div>
-  </div>
+        
+        
+        
+      </style>
+</head>
+<body>
+  
 
-  <div class = "buttons">
-    <button type="button" class="btn tbn-outline-info btn-lg">subject</button>
-  </div>
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <header>About Us</header>
+                    <p>We are a team of students and our goal is to assist other students in learning faster 
+                        by sharing information and becoming more knowledgeable and time-efficient in order to 
+                        increase the overall return on educational investment. By giving students a place to 
+                        exchange knowledge and information, the app we are developing hopes to enhance student 
+                        learning results. The intention is to build a community where students can work together and 
+                        assist one another as they pursue their education, eventually enhancing their knowledge and
+                         improving their academic performance. </p>
+                </div>
+                <div class="col-md-6">
+                    <img src="/ITSC3155_FinalProject/static/images/Homework Hero-logos_transparent.png" width="400" height="400" alt="Team" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>What is Homework Helper?</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Our Goals</h5>
+                            <p class="card-text">We are aware that a lot of students struggle with learning due to a variety of factors, such as time limitations, trouble obtaining pertinent information, and a dearth of support and responsibility. By offering a concentrated site where students can interact with one another, exchange resources and study materials, and participate, our app is made to handle these problems.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">How we can help</h5>
+                            <p class="card-text">Students will use this platform in order to gain better insight about the topic they are studying. They will also use this platform in order to ask questions, review topics of their choosing and prepare for upcoming assessments. This platform can not only be used for state-level assessments, but also for international assessments such as the SAT, ACT, MCAT, and etc.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Meet The Team!</h5>
+                            <p class="card-text"> Teandra, Ashari, Saina, Cnaiya, Jenna, Austin </p>
 
 
 
