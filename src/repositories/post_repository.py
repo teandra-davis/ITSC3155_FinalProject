@@ -20,6 +20,27 @@ class PostRepository:
     def search_posts(self, content: str) -> list[Post]:
         found_posts: list[Post] = Post.query.filter(Post.details.ilike(f'%{content}%')).all()
         return found_posts
+    
+    def update_post(self, post_id: int, title: str = None, author: str = None, content: str = None, category: str = None) -> Post:
+        post_to_update: Post = Post.query.get_or_404(post_id)
+
+        if title is not None:
+            post_to_update.title = title
+        if author is not None:
+            post_to_update.author = author
+        if content is not None:
+            post_to_update.content = content
+        if category is not None:
+            post_to_update.category = category
+
+        db.session.commit()
+        return post_to_update
+    
+    def delete_post(self, post_id: int) -> None:
+        post_to_delete: Post = Post.query.get_or_404(post_id)
+        db.session.delete(post_to_delete)
+        db.session.commit()
+    
 
 
 # Singleton to be used in other modules

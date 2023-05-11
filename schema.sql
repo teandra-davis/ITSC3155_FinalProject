@@ -8,3 +8,4 @@ CREATE TABLE IF NOT EXISTS post (
     category post_category NOT NULL,
     PRIMARY KEY (post_id)
 );
+
