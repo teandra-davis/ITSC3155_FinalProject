@@ -23,32 +23,6 @@ def index():
 def about():
     return render_template("about.html")
 
-
-@app.route('/search', methods=['POST'])
-def search():
-    query = request.form['query']
-    #results = perform_search(query)
-    return render_template('search.html', results = results)
-@app.get('/create')
-def posts_questions():
-    # Trying to impleme nt the posts html
-    author_name = request.form.get('author_name', '')
-    title = request.form.get('title', '')
-    content = request.form.get('content','')
-    
-subject = request.form.get('subject','')
-    information = post_repository.create_post(title, content, subject)
-    return render_template('post.html')
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-        return 'Registration successful!'
-    
-    return render_template('register.html')
-    
 #Showing all posts
 @app.get('/post/all')
 def list_all_posts():
