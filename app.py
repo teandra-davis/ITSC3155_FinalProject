@@ -48,8 +48,10 @@ def create_post():
     return redirect(f'/post/{created_post.post_id}')
 
 #Searching all posts
-#@app.route('/search', methods=['POST'])
-#def search():
-   # query = request.form['query']
-   # results = perform_search(query)
-  #  return render_template('search.html', results = results)
+@app.route('/post/search', methods=['POST'])
+def search():
+    postsSearch = []
+    p = request.args.get('p', '')
+    if p != '':
+        postsSearch = post_repository_singleton.search_posts(p)
+    return render_template('search.html', search_active=True, posts=postsSearch, search_query=p)
