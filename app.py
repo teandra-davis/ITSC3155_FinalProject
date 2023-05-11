@@ -29,6 +29,7 @@ def index():
 @app.get('/create')
 def posts_questions():
     # Trying to impleme nt the posts html
+    author_name = request.form.get('author_name', '')
     title = request.form.get('title', '')
     content = request.form.get('content','')
     subject = request.form.get('subject','')

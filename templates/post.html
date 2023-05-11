@@ -9,32 +9,20 @@
       <form action="/create" method="post">
           <label for="title">Title:</label><br>
           <input type="text" id="title" name="title" required><br>
-
-          <label for="subject">Subject:</label><br>
           
-          <input type="radio" id="MATH" name="subject" value="math">
-          <label for="math">Math</label> required<br>
-
-          <input type="radio" id="SCIENCE" name="subject" value="science">
-          <label for="science">Science</label> required<br>
-
-          <input type="radio" id="ENGLISH" name="subject" value="english">
-          <label for="english">English</label> required<br>
-
-          <input type="radio" id="HISTORY" name="subject" value="history">
-          <label for="history">History</label> required<br>
-
-          <input type="radio" id="SCIENCE" name="subject" value="science">
-          <label for="science">Science</label> required<br>
-
-          <input type="radio" id="COMPUTERSCIENCE" name="subject" value="computerscience">
-          <label for="computerscience">Computer Science</label> required<br>
-
-          <input type="radio" id="ARTS" name="subject" value="arts">
-          <label for="arts">Arts</label> required<br>
-
-          <input type="radio" id="OTHER" name="subject" value="other">
-          <label for="other">Other</label> required<br>
+          <form action="#">
+            <label for="subject">Subject:</label>
+            <select name="subjects" id="subject">
+              <option value="math">Math</option>
+              <option value="science">Science</option>
+              <option value="english">English</option>
+              <option value="history">History</option>
+              <option value="cs">Computer Science</option>
+              <option value="arts">Arts</option>
+              <option value="other">Other</option>
+            </select>
+            <input type="submit" value="Submit" />
+      </form>
 
           <label for="content">Content:</label><br>
           <input type="text" id="content" name="content" required><br>
