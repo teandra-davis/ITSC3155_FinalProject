@@ -11,14 +11,14 @@ class PostRepository:
         found_post: HomeworkPost = HomeworkPost.query.get_or_404(post_id)
         return found_post
 
-    def create_post(self, author_name: str, title: str, details: str, category_id: int) -> HomeworkPost:
-        new_post = HomeworkPost(author_name=author_name, title=title, details=details, category_id=category_id)
+    def create_post(self, author_name: str, title: str, content: str, subject: int) -> HomeworkPost:
+        new_post = HomeworkPost(author_name=author_name, title=title, content=content, subject=subject)
         db.session.add(new_post)
         db.session.commit()
         return new_post
 
     def search_posts(self, details: str) -> list[HomeworkPost]:
-        found_posts: list[HomeworkPost] = HomeworkPost.query.filter(HomeworkPost.title.ilike(f'%{title}%')).all()
+        found_posts: list[HomeworkPost] = HomeworkPost.query.filter(HomeworkPost.details.ilike(f'%{details}%')).all()
         return found_posts
 
 
