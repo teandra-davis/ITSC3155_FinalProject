@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Account</title>{% endblock %}
+
+{% block body %}
+
+<h1>User Profile</h1>
+	<table>
+		<tr>
+			<td>Username:</td>
+			<td>{{ username }}</td>
+		</tr>
+		<tr>
+			<td>First Name:</td>
+			<td>{{ first_name }}</td>
+		</tr>
+		<tr>
+			<td>Last Name:</td>
+			<td>{{ last_name }}</td>
+		</tr>
+		<tr>
+			<td>Email:</td>
+			<td>{{ email }}</td>
+		</tr>
+		<tr>
+			<td>Account Created:</td>
+			<td>{{ account_created }}</td>
+		</tr>
+	</table>
+	<form action="/user/{{user_id}}/delete" method="POST">
+		<button class = "btn btn-danger" type="deletebtn">Delete Account</button>
+	</form>
+
+	<form action="/user/{{user_id}}/edit" method="POST">
+		<label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+		<button class = "btn btn-danger" type="editbtn">Update Email Address</button>
+	</form>
+	
+{% endblock %}

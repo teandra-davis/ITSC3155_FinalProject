@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Edit Post</title>{% endblock %}
+    {% block body %} 
+    <div class = "container-fluid pt-7">
+      <div class="text-center py-5">
+        <h1>Edit a Post Below</h1>
+      </div>
+      
+      <form action="/post/{{ post.post_id }}" method="POST">
+          <label for="title" class = "form-label">Name:</label>
+          <input type="text" id="author" name="author" class = "form-control" value = "{{ post.author }}"required>
+
+          <br>
+
+          <label for="title" class = "form-label">Title:</label>
+          <input type="text" id="title" name="title" class = "form-control" value="{{ post.title }}"required>
+          
+          <br>
+
+          <label for="content" class = "form-label">Content:</label>
+          <textarea type="text" id="content" name="content" class = "form-control" required>{{ post.content }}</textarea>
+
+          <br>
+
+          <label for="category" class = "form-label">Category:</label>
+          <select name = "category" class="form-control form-select-lg mb-3" aria-label="Default select example" required>
+            <option {% if post.category == '1212' %}selected{% endif %} value="1212">1212</option>
+            <option {% if post.category == '1213' %}selected{% endif %} value="1213">1213</option>
+            <option {% if post.category == '2214' %}selected{% endif %} value="2214">2214</option>
+            <option {% if post.category == '3155' %}selected{% endif %} value="3155">3155</option>
+          </select>
+
+          <br>
+          
+          <div class="text-center">
+            <button type="submit" class = "btn btn-primary">Submit</button>
+          </div>
+          
+      </form>
+  </div>
+{% endblock %}
