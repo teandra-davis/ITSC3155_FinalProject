@@ -108,7 +108,11 @@ def login():
         password = request.form['password']
 
         existing_user = User.query.filter_by(username=username).first()
-
+        if existing_user:
+            pass
+        else:
+                        # Return an error message
+            return render_template('login.html', error='Invalid login credentials')
         if bcrypt.check_password_hash(existing_user.password, password):
             # Redirect to the landing page
             session['user'] = {
