@@ -9,6 +9,16 @@ CREATE TABLE IF NOT EXISTS post (
     PRIMARY KEY (post_id)
 );
 
+CREATE TABLE posts (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(100) NOT NULL,
+    author VARCHAR(100) NOT NULL,
+    content TEXT NOT NULL,
+    category VARCHAR(50),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS "user" (
     user_id SERIAL,
     first_name  VARCHAR(255) NOT NULL,
@@ -18,4 +28,14 @@ CREATE TABLE IF NOT EXISTS "user" (
     username    VARCHAR(255) NOT NULL,
     password    VARCHAR(255) NOT NULL,
     PRIMARY KEY (user_id)
+);
+
+-- Create the comments table
+CREATE TABLE IF NOT EXISTS comments (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    post_id INTEGER NOT NULL,
+    author VARCHAR(100) NOT NULL,
+    content TEXT NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES posts(id)
 );
