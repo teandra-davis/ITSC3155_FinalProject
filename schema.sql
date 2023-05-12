@@ -9,12 +9,12 @@ CREATE TABLE IF NOT EXISTS post (
     PRIMARY KEY (post_id)
 );
 
-CREATE TABLE IF NOT EXIST user (
+CREATE TABLE IF NOT EXISTS "user" (
     user_id SERIAL,
     first_name  VARCHAR(255) NOT NULL,
     last_name   VARCHAR(255) NOT NULL,
     email       VARCHAR(255) NOT NULL,
-    date_added  DATETIME NOT NULL,
+    date_added  DATE NOT NULL,
     username    VARCHAR(255) NOT NULL,
     password    VARCHAR(255) NOT NULL,
     PRIMARY KEY (user_id)

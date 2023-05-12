@@ -26,6 +26,10 @@ bcrypt.init_app(app)
 def index():
     return render_template('index.html')
 
+@app.route('/about', methods=[''])
+def about():
+    return render_template("about.html")
+
 #Showing all posts
 @app.get('/post/all')
 def list_all_posts():
@@ -53,6 +57,41 @@ def create_post():
     category = request.form.get('category')
     created_post = post_repository_singleton.create_post(title, author_name, content, category)
     return redirect(f'/post/{created_post.post_id}')
+
+#Return the editing html
+@app.get('/post/<int:post_id>/edit')
+def get_edit_post(post_id: int):
+    post = post_repository_singleton.get_post_by_id(post_id) 
+    return render_template('edit.html', post = post)
+
+#Handles editing
+@app.post('/post/<int:post_id>')
+def update_post(post_id: int):
+    author_name = request.form.get('author', '')
+    title = request.form.get('title', '')
+    content = request.form.get('content','')
+    category = request.form.get('category')
+    post = post_repository_singleton.get_post_by_id(post_id)
+    post_repository_singleton.update_post(post_id, title, author_name, content, category)
+    
+    if title is not None:
+        post.title = title
+    if author_name is not None:
+        post.author = author_name
+    if content is not None:
+        post.content = content
+    if category is not None:
+        post.category = category
+        
+    db.session.commit()
+    return redirect(f'/post/{post_id}')
+
+#Handles the delete
+@app.post('/post/<int:post_id>/delete')
+def delete_post(post_id: int):
+    post_repository_singleton.delete_post(post_id)
+    return redirect(f'/post/all')
+
 
 @app.route('/search', methods=['POST'])
 def search():
