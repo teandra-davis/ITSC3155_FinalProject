@@ -172,6 +172,30 @@ def user():
     last_name = current_user.last_name
     email = current_user.email
     account_created = current_user.date_added
+    user_id = current_user.user_id
 
     # Render the user page with the user's information
-    return render_template('user.html', username=username, first_name=first_name, last_name=last_name, email=email, account_created=account_created)
+    return render_template('user.html', username=username, first_name=first_name, last_name=last_name, email=email, account_created=account_created, user_id=user_id)
+
+#Handles the user delete
+@app.post('/user/<int:user_id>/delete')
+def delete_user(user_id: int):
+    if 'user' not in session:
+        return redirect('/')
+    # Get the current user's information from the database
+    user = session['user']
+    print(user)
+    user_repository_singleton.delete_user(user_id)
+    return redirect('/')
+
+#Handles the user email update
+@app.post('/user/<int:user_id>/edit')
+def edit_user(user_id: int):
+    if 'user' not in session:
+        return redirect('/')
+    # Get the current user's information from the database
+    user = session['user']
+    email = request.form['email']
+    print(user)
+    user_repository_singleton.update_user(user_id, email)
+    return redirect('/')

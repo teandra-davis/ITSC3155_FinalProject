@@ -27,4 +27,14 @@
 			<td>{{ account_created }}</td>
 		</tr>
 	</table>
+	<form action="/user/{{user_id}}/delete" method="POST">
+		<button class = "btn btn-danger" type="deletebtn">Delete Account</button>
+	</form>
+
+	<form action="/user/{{user_id}}/edit" method="POST">
+		<label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+		<button class = "btn btn-danger" type="editbtn">Update Email Address</button>
+	</form>
+	
 {% endblock %}

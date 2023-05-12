@@ -21,5 +21,17 @@ class UserRepository:
         found_users: list[User] = User.query.filter(User.details.ilike(f'%{content}%')).all()
         return found_users
     
+    def update_user(self, user_id: int, email: str) -> User:
+        user_to_update: User = User.query.get_or_404(user_id)
+
+        user_to_update.email = email
+        db.session.commit()
+        return user_to_update
+    
+    def delete_user(self, user_id: int) -> None:
+        user_to_delete: User = User.query.get_or_404(user_id)
+        db.session.delete(user_to_delete)
+        db.session.commit()
+    
 # Singleton to be used in other modules
 user_repository_singleton = UserRepository()
