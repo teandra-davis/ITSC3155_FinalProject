@@ -161,7 +161,7 @@ def register():
 @app.route('/user')
 def user():
     if 'user' not in session:
-        return redirect('/')
+        return redirect('/login')
     # Get the current user's information from the database
     user = session['user']
     print(user)
@@ -198,4 +198,4 @@ def edit_user(user_id: int):
     email = request.form['email']
     print(user)
     user_repository_singleton.update_user(user_id, email)
-    return redirect('/')
+    return redirect('/user')
