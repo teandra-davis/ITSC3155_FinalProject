@@ -6,14 +6,11 @@ from datetime import datetime
 db = SQLAlchemy()
 
 class Post(db.Model):
-    __tablename__ = 'posts'
-    
     post_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     user = db.Column(db.String, nullable=False)
     content = db.Column(db.Text, nullable=False)
     category = db.Column(Enum('1212', '1213', '2214', '3155'), nullable=False)
-    comments = db.relationship('Comment', backref='post', lazy=True)
     
 class Comment(db.Model):
     __tablename__ = 'comments'
