@@ -41,6 +41,15 @@ class PostRepository:
         db.session.delete(post_to_delete)
         db.session.commit()
     
+    def get_comments_for_post(self, post_id):
+        post = self.get_post_by_id(post_id)
+        return post.comments
+
+    def delete_comments_for_post(self, post_id):
+        comments = self.get_comments_for_post(post_id)
+        for comment in comments:
+            db.session.delete(comment)
+        db.session.commit()
 
 
 # Singleton to be used in other modules
